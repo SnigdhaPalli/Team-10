@@ -1,0 +1,69 @@
+<html lang="en">
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <style>
+        table{
+            border: 5px solid black;
+            height: 0;
+            padding: 0px;
+
+        }
+    </style>
+  </head>
+  <body>
+      <!--https://www.youtube.com/watch?v=WMQ2sq1dw6Y-->
+      <div class="container"></div>
+        <table class="table" width="10%">
+            <thread>
+                <tr>
+                    <th>Name</th>
+                    <th>Inspection Date</th>
+                    <th>Inspection Results</th>
+                    <th>Inspection Type</th>
+                    <th>Address Line</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>Category</th>
+                    <th>Owner</th>
+                    <th>Establishment ID</th>
+                    <th></th>
+                               
+                </tr>
+
+            </thread>
+            <tbody id ="dataset"></tbody>
+            
+        </table>
+        <script>
+            fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json")
+            .then(res=>{ 
+                res.json()
+                .then(dataset=>{
+                    console.log(dataset);
+                    if(dataset.length >0){
+                        let test_data = "";
+                        dataset.forEach((value)=>{
+                            test_data +='<tr>';
+                            test_data += '<td>'+value.name+'</td>';
+                            test_data += '<td>'+value.inspection_date+'</td>';
+                            test_data += '<td>'+value.inspection_results+'</td>';
+                            test_data += '<td>'+value.inspection_type+'</td>';
+                            test_data += '<td>'+value.address_line_1+'</td>';
+                            test_data += '<td>'+value.city+'</td>';
+                            test_data += '<td>'+value.state+'</td>';
+                            test_data += '<td>'+value.zip+'</td>';
+                            test_data += '<td>'+ value.category+'</td>';
+                            test_data += '<td>'+value.owner+'</td>';
+                            test_data += '<td>'+ value.establishment_id+'</td>';
+                        })
+                        document.getElementById("dataset").innerHTML = test_data;
+                    }
+                })
+            })
+        </script>
+        <script>
+            
+        </script>
+  </body>
